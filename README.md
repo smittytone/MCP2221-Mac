@@ -30,9 +30,9 @@ The last two examples, `cpu.py` and `network.py`, require *psutil*, installed us
 
 The following example uses an [Adafruit MCP9808 temperature sensor breakout](https://www.adafruit.com/product/1782) along with the seven-segment LED. To make use of the sensor, you need to install its driver library as follows: `pip3 install adafruit-circuitpython-mcp9808`. That done you can run the code to display the current ambient temperature on the LED.
 
-- [`mcp9808.py`](./i2c/mcp9808.py) — Display atmospheric temperature readings.<br /><img src="./images/i2c_mcp9808.png" width+"600" />
+- [`mcp9808.py`](./i2c/mcp9808.py) — Display atmospheric temperature readings.<br /><img src="./images/i2c_mcp9808.png" width="600" />
 
 The following examples use either an [Adafruit 128x64 OLED](https://www.adafruit.com/product/326) panel connected to the MCP2221 Breakout’s I&sup2;C pins. The display is driven by a separate library, `ssd1306_circuitpython.py`, which is included here to make it easy to import. `macinfo.py` also requires *psutil*, installed using `pip3 install psutil`.
 
 - [`macinfo_128x64.py`](./i2c/macinfo_128x64.py) — See a wider selection of Mac system info in real time on a 128x64 display.
-- [`boxes_128x64.py`](./i2c/boxes_128x64.py) — As above but for the 128x64 display.<br /><img src="./images/i2c_oled_64.png" width+"600" />
+- [`boxes_128x64.py`](./i2c/boxes_128x64.py) — As above but for the 128x64 display.<br /><img src="./images/i2c_oled_64.png" width="600" />
