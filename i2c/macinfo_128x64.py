@@ -58,7 +58,7 @@ if __name__ == '__main__':
         display.move(24, 16).text("{:.1f}%".format(mem))
 
         data = psutil.swap_memory()
-        mem = 0 if data.total ==0 else (data.used / data.total) * 100
+        mem = 0 if data.total == 0 else (data.used / data.total) * 100
         display.move(90, 16).text("{:.1f}%".format(mem))
 
         data = psutil.disk_usage('/')
