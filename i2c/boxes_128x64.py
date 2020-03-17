@@ -35,8 +35,10 @@ if __name__ == '__main__':
     while True:
         r = randint(0, 100)
         if r == 50:
+            # Clear the display
             display.clear()
         else:
+            # Draw a box
             rect = make_rect()
             is_full = True if r > 50 else False
             display.rect(rect[0], rect[1], rect[2], rect[3], is_full)
