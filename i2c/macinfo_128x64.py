@@ -23,6 +23,7 @@ if __name__ == '__main__':
 
     display = SSD1306OLED(reset, i2c, 0x3D, 128, 64)
     display.set_inverse()
+    display_is_inverse = True
 
     # Get initial values
     data = psutil.net_io_counters()
@@ -33,8 +34,8 @@ if __name__ == '__main__':
     head = "**SYSTEM INFORMATION**"
     head_centre = int((127 - display.length_of_string(head)) / 2)
     if head_centre < 0: head_centre = 0
-    countl = int(psutil.cpu_count())
-    counta = int(psutil.cpu_count(False))
+    logical_cores = int(psutil.cpu_count())
+    physical_cores = int(psutil.cpu_count(False))
 
     while True:
         # Get the CPU utilization and calculate
@@ -42,7 +43,7 @@ if __name__ == '__main__':
         display.clear()
         display.move(head_centre, 0).text(head)
         display.move(0, 8).text("CPU:")
-        display.move(58, 8).text("Cores: " + str(countl) + " on " + str(counta))
+        display.move(58, 8).text("Cores: " + str(logical_cores) + "/" + str(physical_cores))
         display.move(0, 16).text("Mem:")
         display.move(58, 16).text("Swap:")
         display.move(0, 24).text("Disk:")
