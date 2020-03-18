@@ -32,7 +32,8 @@ if __name__ == '__main__':
     out_packets = 0
     in_packets = 0
     head = "**SYSTEM INFORMATION**"
-    head_centre = int((127 - display.length_of_string(head)) / 2)
+    length = display.length_of_string(head)
+    head_centre = int((128 - length) / 2)
     if head_centre < 0: head_centre = 0
     logical_cores = int(psutil.cpu_count())
     physical_cores = int(psutil.cpu_count(False))
@@ -42,14 +43,14 @@ if __name__ == '__main__':
         # the Binary-Coded Decimal (BCD) form
         display.clear()
         display.move(head_centre, 0).text(head)
-        display.move(0, 8).text("CPU:")
+        display.move(1, 8).text("CPU:")
         display.move(58, 8).text("Cores: " + str(logical_cores) + "/" + str(physical_cores))
-        display.move(0, 16).text("Mem:")
+        display.move(1, 16).text("Mem:")
         display.move(58, 16).text("Swap:")
-        display.move(0, 24).text("Disk:")
-        display.move(0, 32).text("Booted:")
-        display.move(0, 40).text("Pkts in:")
-        display.move(0, 48).text("Pkts out:")
+        display.move(1, 24).text("Disk:")
+        display.move(1, 32).text("Booted:")
+        display.move(1, 40).text("Pkts in:")
+        display.move(1, 48).text("Pkts out:")
 
         cpu = int(psutil.cpu_percent())
         display.move(30, 8).text(str(cpu) + "%")
@@ -71,22 +72,23 @@ if __name__ == '__main__':
 
         data = psutil.net_io_counters()
         in_packets = data.packets_recv - start_in_packets
-        if in_packets > 99999:
+        if in_packets > 9999999:
             start_in_packets = data.packets_recv
             in_packets = 0
-        display.move(50, 40).text(str(in_packets))
+        display.move(58, 40).text(str(in_packets))
 
         out_packets = data.packets_sent - start_out_packets
-        if out_packets > 99999:
+        if out_packets > 9999999:
             start_out_packets = data.packets_sent
             out_packets = 0
-        display.move(50, 48).text(str(out_packets))
+        display.move(58, 48).text(str(out_packets))
 
         batt = psutil.sensors_battery()
         if batt == None:
-            display.move(0, 56).text("No battery (desktop)")
+            display.move(1, 56).text("No battery (desktop)")
         else:
-            display.move(0, 56).text("Battery: {:.1f}%".format(batt.percent))
+            display.move(1, 56).text("Battery:")
+            display.move(58, 56).text("{:.1f}%".format(batt.percent))
 
         display.draw()
 
