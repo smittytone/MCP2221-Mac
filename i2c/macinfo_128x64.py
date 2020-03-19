@@ -14,7 +14,7 @@ DELAY = 0.5
 
 # START
 if __name__ == '__main__':
-    # Set up I2C on the FT232H Breakout
+    # Set up I2C on the MCP2221 Breakout
     i2c = busio.I2C(board.SCL, board.SDA)
 
     # Set up the RST pin
