@@ -4,7 +4,7 @@ class SSD1306OLED:
     For example: https://www.adafruit.com/product/931
     This release is written for CircuitPython
 
-    Version:   1.0.0
+    Version:   1.0.1
     Author:    smittytone
     Copyright: 2020, Tony Smith
     Licence:   MIT
@@ -242,7 +242,7 @@ class SSD1306OLED:
         """
         Draw the current buffer contents on the screen
         """
-        self._render()
+        self.render()
 
     def home(self):
         """
@@ -287,7 +287,7 @@ class SSD1306OLED:
         if x < 0 or x > (self.width - 1) or y < 0 or y > (self.height - 1): return
 
         # Get the buffer byte holding the pixel
-        byte = self._coords_to_index(x, y)
+        byte = self.coords_to_index(x, y)
         value = self.buffer[byte]
         bit = y - ((y >> 3) << 3)
 
@@ -428,7 +428,7 @@ class SSD1306OLED:
                 if j == len(glyph) and x < 128:
                     c = 0x00
                 else:
-                    c = self._flip(glyph[j])
+                    c = self.flip(glyph[j])
                 z = -1
                 for k in range(0, 8):
                     # k adds to y
@@ -439,7 +439,7 @@ class SSD1306OLED:
                     else:
                         z += 1
 
-                    b = self._coords_to_index(x , y + k)
+                    b = self.coords_to_index(x , y + k)
                     v = self.buffer[b]
                     if c & (1 << z) != 0: v = v | (1 << z)
                     self.buffer[b] = v
@@ -475,7 +475,7 @@ class SSD1306OLED:
 
     # ***** PRIVATE FUNCTIONS *****
 
-    def _render(self):
+    def render(self):
         """
         Write the display buffer out to I2C
         """
@@ -484,7 +484,7 @@ class SSD1306OLED:
         buffer[0] = self.SSD1306_WRITETOBUFFER
         self.i2c.writeto(self.address, bytes(buffer))
 
-    def _coords_to_index(self, x, y):
+    def coords_to_index(self, x, y):
         """
         Convert pixel co-ordinates to a bytearray index
         Calling function should check for valid co-ordinates first
@@ -494,7 +494,7 @@ class SSD1306OLED:
         """
         return ((y >> 3) * self.width) + x
 
-    def _indexToCoords(self, idx):
+    def indexToCoords(self, idx):
         """
         Convert bytearray index to pixel co-ordinates
 
@@ -505,7 +505,7 @@ class SSD1306OLED:
         x = idx - (y << 4)
         return (x, y)
 
-    def _flip(self, value):
+    def flip(self, value):
         """
         Rotates the character array from the saved state
         to that required by the screen orientation
