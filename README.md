@@ -7,7 +7,7 @@ This repo is dedicated to using [Adafruit’s MCP2221 Breakout](https://www.adaf
 Run each of the following at the command line (macOS’ *Terminal*):
 
 1. `pip3 install hidapi adafruit-blinka`
-2. `echo 'export BLINKA_MCP2221=1' >> ~/.bash_profile`
+1. `echo 'export BLINKA_MCP2221=1' >> ~/.bash_profile`
 
 Now quit *Terminal* and the restart it to make use of the updated *bash* profile.
 
@@ -17,7 +17,7 @@ Connect an MCP2221 Breakout to one of your Mac’s USB ports. Depending on which
 
 This repo contains a number of simple apps to try:
 
-### I2C ###
+### I&sup2;C ###
 
 The first set of examples make use of an [Adafruit 0.56-inch 4-digit, 7-segment LED display](http://www.adafruit.com/products/878) connected to the MCP2221 Breakout’s I&sup2;C pins, SCL and SDA. The display is driven by a separate library, `htk1633segment_circuitpython.py`, which is included here to make it easy to import. You can visit the library’s source repo [here](https://github.com/smittytone/HT16K33Segment-Python).
 
